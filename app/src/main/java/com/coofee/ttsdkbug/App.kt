@@ -15,10 +15,10 @@ class App : Application() {
 
         MyUncaughtExceptionHandler("handler1")
 
-        Thread {
-            Thread.sleep(1000L)
+//        Thread {
+//            Thread.sleep(1000L)
             MyUncaughtExceptionHandler("handler2")
-        }.start()
+//        }.start()
 
         MyUncaughtExceptionHandler("handler3")
 
@@ -49,13 +49,13 @@ class App : Application() {
         root = UncaughtExceptionHandlerStats.dump()
         Log.e(UncaughtExceptionHandlerStats.TAG, "after ttsdk init root=$root")
 
-        Thread {
+//        Thread {
             MyUncaughtExceptionHandler("handler4")
-        }.start()
+//        }.start()
 
-        Thread {
+//        Thread {
             MyUncaughtExceptionHandler("handler5")
-        }.start()
+//        }.start()
 
     }
 }
