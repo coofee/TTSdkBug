@@ -1,6 +1,7 @@
 package com.coofee.ttsdkbug
 
 import android.app.Application
+import android.util.Log
 import com.bytedance.sdk.openadsdk.TTAdConfig
 import com.bytedance.sdk.openadsdk.TTAdConstant
 import com.bytedance.sdk.openadsdk.TTAdSdk
@@ -10,6 +11,8 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        UncaughtExceptionHandlerStats.startTimerTask()
+
         MyUncaughtExceptionHandler("handler1")
 
         Thread {
@@ -18,6 +21,9 @@ class App : Application() {
         }.start()
 
         MyUncaughtExceptionHandler("handler3")
+
+        var root = UncaughtExceptionHandlerStats.dump()
+        Log.e(UncaughtExceptionHandlerStats.TAG, "before ttsdk init, root=$root")
 
         // 使用 MyUncaughtExceptionHandler 过滤日志。
         // 1. 把穿山甲sdk初始化注释掉，最后一条日志是：MyUncaughtExceptionHandler: all of MyUncaughtExceptionHandler has invoked.
@@ -39,6 +45,9 @@ class App : Application() {
                 .supportMultiProcess(false)
                 .build()
         )
+
+        root = UncaughtExceptionHandlerStats.dump()
+        Log.e(UncaughtExceptionHandlerStats.TAG, "after ttsdk init root=$root")
 
         Thread {
             MyUncaughtExceptionHandler("handler4")
