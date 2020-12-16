@@ -1,7 +1,7 @@
 
 # 穿山甲sdk问题分析
 
-## 穿山甲sdk 2.8.0.3版本不回调UncaughtExceptionHandler，导致无法统计崩溃信息，场景复现与分析
+## 1. 穿山甲sdk 2.8.0.3版本不回调UncaughtExceptionHandler，导致无法统计崩溃信息，场景复现与分析
 
 通过添加/删除如下代码启用/删除穿山甲sdk初始化代码，
 
@@ -29,7 +29,7 @@ bug分析:
 
 ![](doc/ttsdk_bug_class.png)
 
-## 穿山甲sdk 3.3.0.3版本`Thread.UncaughtExceptionHandler`循环引用分析
+## 2. 穿山甲sdk 3.3.0.3版本`Thread.UncaughtExceptionHandler`循环引用分析
 
 通过`UncaughtExceptionHandlerStats`类，定时获取在系统中注册的`Thread.UncaughtExceptionHandler`，打印日志如下：
 
